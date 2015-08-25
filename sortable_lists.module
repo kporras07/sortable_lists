@@ -117,7 +117,7 @@ function sortable_lists_process($element, $form_state) {
         '#options' => sortable_lists_get_select_options($default_value[$element['#type']][$key], $element['#options']),
         '#multiple' => TRUE,
         '#weight' => $weight,
-        '#prefix' => '<div class="sortable-lists-list-' . $key . '">',
+        '#prefix' => '<div class="sortable-lists-list sortable-lists-list-' . $key . '">',
         '#suffix' => '</div>',
       );
       $weight ++;

@@ -7,3 +7,8 @@
 .sortable-lists-elements .item-placeholder {
   border: dashed #000 1px;
 }
+.sortable-lists-list {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0.5em;
+}
