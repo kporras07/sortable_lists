@@ -24,6 +24,8 @@
           jQuery(this).attr('id', id);
         });
 
+        jQuery('.sortable-lists-elements .select-block', context).css('display', 'block');
+
         jQuery('.sortable-lists-elements .select-block ul', context).sortable({
           connectWith: '.sortable-lists-elements .select-block ul',
           placeholder: 'item-placeholder',

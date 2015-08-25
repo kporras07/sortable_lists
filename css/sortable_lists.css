@@ -1,6 +1,3 @@
-.sortable-lists-elements div.select-block {
-  display: block !important;
-}
 .sortable-lists-elements div.select-block ul {
   min-height: 50px;
 }
