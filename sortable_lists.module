@@ -94,7 +94,7 @@ function sortable_lists_process($element, $form_state) {
         ),
       ),
       'css' => array(
-        $path . '/sortable_lists.css' => array(
+        $path . '/css/sortable_lists.css' => array(
           'type' => 'file',
         ),
       ),
