@@ -155,7 +155,12 @@ function sortable_lists_element_validate($element, &$form_state) {
   $value = filter_xss($form_state['input'][$element['#name']][$element['#type']]['value']);
   $elements = explode('|', $value);
   foreach ($elements as &$value) {
-    $value = explode(',', $value);
+    if (!empty($value)) {
+      $value = explode(',', $value);
+    }
+    else {
+      $value = array();
+    }
   }
   $options = $element['#options'];
   if (sortable_lists_validate_selected_elements($elements, $element)) {
