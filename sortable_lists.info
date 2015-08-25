@@ -1,0 +1,3 @@
+name = Sortable List
+description = Add a FAPI Element for using sortable lists.
+core = 7.x

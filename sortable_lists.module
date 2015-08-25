@@ -1,0 +1,184 @@
+<?php
+
+/**
+ * @file
+ * Main file for sortable_lists module
+ */
+
+/**
+ * Implements hook_element_info().
+ */
+function sortable_lists_element_info() {
+  return array(
+    'sortable_lists' => array(
+      '#input' => TRUE,
+      '#tree' => TRUE,
+      '#process' => array('sortable_lists_process'),
+      '#element_validate' => array('sortable_lists_element_validate'),
+      '#theme' => array('sortable_lists'),
+      '#theme_wrappers' => array('form_element'),
+    ),
+  );
+}
+
+/**
+ * Process callback for sortable_lists element.
+ */
+function sortable_lists_process($element, $form_state) {
+  $options = !empty($element['#options']) ? $element['#options'] : array();
+  $columns = !empty($element['#columns']) ? $element['#columns'] : array(
+    'allowed' => t('Allowed'),
+    'selected' => t('Selected'),
+  );
+  $default_value = array();
+  if (!empty($element['#default_value'])) {
+    $default_value = $element['#default_value'];
+  }
+  elseif (isset($element['#type'])) {
+    $column_count = 0;
+    foreach ($columns as $key => $column) {
+      if ($column_count == 0) {
+        $default_value[$element['#type']][$key] = $options;
+      }
+      else {
+        $default_value[$element['#type']][$key] = array();
+      }
+      $column_count ++;
+    }
+  }
+
+  if (isset($element['#id']) && isset($element['#type'])) {
+    $settings = array('id' => $element['#id'] . '-' . str_replace('_', '-', $element['#type']));
+    foreach ($default_value as $key => $value) {
+      $settings['values'][$key] = $value;
+    }
+  }
+  else {
+    $settings = array();
+  }
+
+  $path = drupal_get_path('module', 'sortable_lists');
+
+  $element['sortable_lists'] = array(
+    '#type' => 'fieldset',
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#tree' => TRUE,
+    '#attached' => array(
+      'library' => array(
+        0 => array('system', 'jquery'),
+        1 => array('system', 'ui'),
+        2 => array('system', 'ui.widget'),
+        3 => array('system', 'ui.sortable'),
+      ),
+      'js' => array(
+        0 => array(
+          'data' => array('sortableLists' => $settings),
+          'type' => 'setting',
+        ),
+        1 => array(
+          'data' => 'window.$ = jQuery;',
+          'type' => 'inline',
+        ),
+        $path . '/js/select-widget-min.js' => array(
+          'type' => 'file',
+          'weight' => 1,
+        ),
+        $path . '/js/select-widget-min.js' => array(
+          'type' => 'file',
+          'weight' => 1,
+        ),
+        $path . '/js/sortable_lists.js' => array(
+          'type' => 'file',
+          'weight' => 2,
+        ),
+      ),
+      'css' => array(
+        $path . '/sortable_lists.css' => array(
+          'type' => 'file',
+        ),
+      ),
+
+    ),
+    '#attributes' => array(
+      'class' => array('sortable-lists-elements'),
+    ),
+  );
+
+  $weight = 0;
+
+  foreach ($columns as $key => $value) {
+    $key = check_plain($key);
+    $value = check_plain($value);
+    if ($key && $value && isset($element['#type'])) {
+      $element['sortable_lists'][$key] = array(
+        '#title' => $value,
+        '#type' => 'select',
+        '#options' => sortable_lists_get_select_options($default_value[$element['#type']][$key], $element['#options']),
+        '#multiple' => TRUE,
+        '#weight' => $weight,
+        '#prefix' => '<div class="sortable-lists-list-' . $key . '">',
+        '#suffix' => '</div>',
+      );
+      $weight ++;
+    }
+  }
+
+  $element['sortable_lists']['value'] = array(
+    '#type' => 'hidden',
+    '#attributes' => array('id' => 'sortable-lists-value'),
+  );
+
+
+  $element['#value'] = array_keys($options);
+
+  return $element;
+}
+
+/**
+ * Returns an options array for given machine names and given options array.
+ */
+function sortable_lists_get_select_options($machine_names, $options) {
+  $new_options = array();
+  foreach ($machine_names as $machine_name) {
+    if (isset($options[$machine_name])) {
+      $new_options[check_plain($machine_name)] = check_plain($options[$machine_name]);
+    }
+  }
+  return $new_options;
+}
+
+/**
+ * Element validate function for sortable_lists.
+ */
+function sortable_lists_element_validate($element, &$form_state) {
+  $value = filter_xss($form_state['input'][$element['#name']][$element['#type']]['value']);
+  $elements = explode('|', $value);
+  foreach ($elements as &$value) {
+    $value = explode(',', $value);
+  }
+  $options = $element['#options'];
+  if (sortable_lists_validate_selected_elements($elements, $element)) {
+    $values = &$form_state['values'];
+    $column_index = 0;
+    foreach($element['#columns'] as $column_value => $column_name) {
+
+      $values[$element['#name']][$element['#type']][$column_value] = drupal_map_assoc($elements[$column_index]);
+      $column_index ++;
+    }
+  }
+}
+
+/**
+ * Validate if all selected social networks are valid.
+ */
+function sortable_lists_validate_selected_elements($elements, $element) {
+  foreach ($elements as $column_set) {
+    foreach ($column_set as $value) {
+      if (!isset($element['#options'][$value])) {
+        return FALSE;
+      }
+    }
+  }
+  return TRUE;
+}
