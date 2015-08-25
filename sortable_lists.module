@@ -140,7 +140,7 @@ function sortable_lists_process($element, $form_state) {
  */
 function sortable_lists_get_select_options($machine_names, $options) {
   $new_options = array();
-  foreach ($machine_names as $machine_name) {
+  foreach ($machine_names as $machine_name => $name) {
     if (isset($options[$machine_name])) {
       $new_options[check_plain($machine_name)] = check_plain($options[$machine_name]);
     }
