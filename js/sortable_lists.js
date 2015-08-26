@@ -1,4 +1,5 @@
 /**
+ * @file
  * JS for this module.
  */
 
@@ -47,7 +48,7 @@
         function getItems(container) {
           var columns = [];
 
-          jQuery(container+ ' ul').each(function(){
+          jQuery(container + ' ul').each(function(){
             columns.push(jQuery(this).sortable('toArray').join(','));
           });
 
