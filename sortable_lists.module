@@ -84,10 +84,6 @@ function sortable_lists_process($element, $form_state) {
           'type' => 'file',
           'weight' => 1,
         ),
-        $path . '/js/select-widget-min.js' => array(
-          'type' => 'file',
-          'weight' => 1,
-        ),
         $path . '/js/sortable_lists.js' => array(
           'type' => 'file',
           'weight' => 2,
