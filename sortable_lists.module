@@ -148,6 +148,8 @@ function sortable_lists_get_select_options($machine_names, $options) {
  * Element validate function for sortable_lists.
  */
 function sortable_lists_element_validate($element, &$form_state) {
+  // We need to use input instead of value due to that we're manipulating the
+  // element in javascript. So; let's take care of possible security risks here.
   $value = filter_xss($form_state['input'][$element['#name']][$element['#type']]['value']);
   $elements = explode('|', $value);
   foreach ($elements as &$value) {
@@ -158,7 +160,6 @@ function sortable_lists_element_validate($element, &$form_state) {
       $value = array();
     }
   }
-  $options = $element['#options'];
   if (sortable_lists_validate_selected_elements($elements, $element)) {
     $values = &$form_state['values'];
     $column_index = 0;
