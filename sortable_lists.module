@@ -47,6 +47,8 @@ function sortable_lists_process($element, $form_state) {
     }
   }
 
+  $select_widget_path = '';
+
   if (isset($element['#id']) && isset($element['#type'])) {
     $settings = array(
       'id' => $element['#id'] . '-' . str_replace('_', '-', $element['#type']),
@@ -54,9 +56,10 @@ function sortable_lists_process($element, $form_state) {
     foreach ($default_value as $key => $value) {
       $settings['values'][$key] = $value;
     }
+
+    $select_widget_path = libraries_get_path('jquery-drop-down-widget');
     if (empty($select_widget_path)) {
       drupal_set_message(t('You must install the %library library in sites/all/libraries', array('%library' => 'jquery-drop-down-widget')), 'error');
-      $select_widget_path = '';
     }
   }
   else {
@@ -65,7 +68,6 @@ function sortable_lists_process($element, $form_state) {
 
   $path = drupal_get_path('module', 'sortable_lists');
 
-  $select_widget_path = libraries_get_path('jquery-drop-down-widget');
 
   $element['sortable_lists'] = array(
     '#type' => 'fieldset',
