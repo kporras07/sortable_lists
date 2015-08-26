@@ -23,7 +23,7 @@
         jQuery('.sortable-lists-elements .select-block ul', context).sortable({
           connectWith: '.sortable-lists-elements .select-block ul',
           placeholder: 'item-placeholder',
-          stop: updateValue,
+          stop: updateValue
         });
 
         updateValue();
