@@ -10,13 +10,7 @@
         var id = Drupal.settings.sortableLists.id;
         var values = Drupal.settings.sortableLists.values;
 
-        jQuery('.sortable-lists-elements select', context).selectWidget({
-          change: function(changes) {
-            var items = getItems('.sortable-lists-elements .select-block');
-            jQuery('#sortable-lists-value').val(items);
-            return changes;
-          },
-        });
+        jQuery('.sortable-lists-elements select', context).selectWidget();
 
         jQuery('.sortable-lists-elements li', context).each(function() {
           var text = jQuery(this).text();
@@ -29,6 +23,11 @@
         jQuery('.sortable-lists-elements .select-block ul', context).sortable({
           connectWith: '.sortable-lists-elements .select-block ul',
           placeholder: 'item-placeholder',
+          stop: function(changes) {
+            var items = getItems('.sortable-lists-elements .select-block');
+            jQuery('#sortable-lists-value').val(items);
+            return changes;
+          },
         });
 
         function getId(text) {
