@@ -8,14 +8,11 @@
 
   Drupal.behaviors.sortableLists = {
     attach: function (context, settings) {
-      jQuery('.sortable-lists-elements', context).once('sortable-lists', function() {
-
-        var id = Drupal.settings.sortableLists.id;
-        var values = Drupal.settings.sortableLists.values;
+      jQuery('.sortable-lists-elements', context).once('sortable-lists', function () {
 
         jQuery('.sortable-lists-elements select', context).selectWidget();
 
-        jQuery('.sortable-lists-elements li', context).each(function() {
+        jQuery('.sortable-lists-elements li', context).each(function () {
           var text = jQuery(this).text();
           var id = getId(text);
           jQuery(this).attr('id', id);
@@ -38,7 +35,7 @@
 
         function getId(text) {
           var id = '';
-          jQuery('.sortable-lists-elements select option', context).each(function() {
+          jQuery('.sortable-lists-elements select option', context).each(function () {
             if (jQuery(this).text() === text) {
               id = jQuery(this).val();
               return;
@@ -50,7 +47,7 @@
         function getItems(container) {
           var columns = [];
 
-          jQuery(container + ' ul').each(function(){
+          jQuery(container + ' ul').each(function () {
             columns.push(jQuery(this).sortable('toArray').join(','));
           });
 
