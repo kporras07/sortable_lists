@@ -61,6 +61,8 @@ function sortable_lists_process($element, $form_state) {
 
   $path = drupal_get_path('module', 'sortable_lists');
 
+  $select_widget_path = libraries_get_path('jquery-drop-down-widget');
+
   $element['sortable_lists'] = array(
     '#type' => 'fieldset',
     '#collapsible' => TRUE,
@@ -82,7 +84,7 @@ function sortable_lists_process($element, $form_state) {
           'data' => 'window.$ = jQuery;',
           'type' => 'inline',
         ),
-        $path . '/js/select-widget-min.js' => array(
+        $select_widget_path . '/js/select-widget-min.js' => array(
           'type' => 'file',
           'weight' => 1,
         ),
