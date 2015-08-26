@@ -54,6 +54,10 @@ function sortable_lists_process($element, $form_state) {
     foreach ($default_value as $key => $value) {
       $settings['values'][$key] = $value;
     }
+    if (empty($select_widget_path)) {
+      drupal_set_message(t('You must install the %library library in sites/all/libraries', array('%library' => 'jquery-drop-down-widget')), 'error');
+      $select_widget_path = '';
+    }
   }
   else {
     $settings = array();
@@ -62,6 +66,7 @@ function sortable_lists_process($element, $form_state) {
   $path = drupal_get_path('module', 'sortable_lists');
 
   $select_widget_path = libraries_get_path('jquery-drop-down-widget');
+
 
   $element['sortable_lists'] = array(
     '#type' => 'fieldset',
