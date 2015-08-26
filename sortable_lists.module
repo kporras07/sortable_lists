@@ -68,7 +68,6 @@ function sortable_lists_process($element, $form_state) {
 
   $path = drupal_get_path('module', 'sortable_lists');
 
-
   $element['sortable_lists'] = array(
     '#type' => 'fieldset',
     '#collapsible' => TRUE,
