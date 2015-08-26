@@ -22,6 +22,16 @@ function sortable_lists_element_info() {
 }
 
 /**
+ * Implements hook_help().
+ */
+function sortable_lists_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help/#sortable_lists':
+      return '<p>' . t("This module provides a Form API element type for having sortable lists. This is a module for be used by a developer, due to that it doesn't provide any UI itself; you MUST use it in your code.") . '</p>';
+  }
+}
+
+/**
  * Process callback for sortable_lists element.
  */
 function sortable_lists_process($element, $form_state) {
