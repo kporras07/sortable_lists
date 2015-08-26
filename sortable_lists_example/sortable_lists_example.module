@@ -1,0 +1,82 @@
+<?php
+
+/**
+ * @file
+ * Main file for sortable_lists_example module
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function sortable_lists_example_menu() {
+  return array(
+    'examples/sortable_lists' => array(
+      'title' => 'Sortable Lists Example',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('sortable_lists_example_form'),
+      'access callback' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Form callback for sortable_lists_example form.
+ */
+function sortable_lists_example_form($form, $form_state) {
+  $form['sortable_lists_example_element'] = array(
+    '#title' => t('Sortable Lists Element'),
+    '#type' => 'sortable_lists',
+    '#options' => sortable_lists_example_options(),
+    '#columns' => sortable_lists_example_columns(),
+    '#default_value' => variable_get('sortable_lists_example_element', sortable_lists_example_default_value()),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Returns options for sortable_lists_example form.
+ */
+function sortable_lists_example_options() {
+  return array(
+    'one' => t('One'),
+    'two' => t('Two'),
+    'three' => t('Three'),
+    'four' => t('Four'),
+    'five' => t('Five'),
+    'six' => t('Six'),
+  );
+}
+
+/**
+ * Returns columns for sortable_lists_example form.
+ */
+function sortable_lists_example_columns() {
+  return array(
+    'column1' => t('Column 1'),
+    'column2' => t('Column 2'),
+    'column3' => t('Column 3'),
+  );
+}
+
+/**
+ * Returns default value for sortable_lists_example form.
+ */
+function sortable_lists_example_default_value() {
+  return array(
+    'sortable_lists' => array(
+      'column1' => array(
+        'one' => t('One'),
+        'two' => t('Two'),
+      ),
+      'column2' => array(
+        'three' => t('Three'),
+        'four' => t('Four'),
+      ),
+      'column3' => array(
+        'five' => t('Five'),
+        'six' => t('Six'),
+      ),
+    ),
+  );
+}
