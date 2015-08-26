@@ -15,7 +15,7 @@ function sortable_lists_requirements($phase) {
     if (!libraries_get_path('jquery-drop-down-widget')) {
       $requirements['jquery_drop_down_widget'] = array(
         'title' => $t('jQuery Drop Down Widget'),
-        'description' => t('Please add this js library in sites/all/libraries downloading it from !url', array('!url' => l(t('here'), 'https://github.com/karo73/jquery-drop-down-widget/'))),
+        'description' => $t('Please add this js library in sites/all/libraries downloading it from !url', array('!url' => l(t('here'), 'https://github.com/karo73/jquery-drop-down-widget/'))),
         'value' => $t('Not installed'),
         'severity' => REQUIREMENT_ERROR,
       );
