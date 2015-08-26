@@ -17,9 +17,12 @@ you can move elements from one to another and order them; you could use the
 element type that this module provides.
 
 *Installation
-Install as you would normally install a contributed drupal module. See:
+- Install as you would normally install a contributed drupal module. See:
 https://drupal.org/documentation/install/modules-themes/modules-7
 for further information.
+- Install jquery-drop-down-widget
+(https://github.com/karo73/jquery-drop-down-widget)
+in sites/all/libraries.
 
 *Usage
 For using this module; you need to add an element to your form an use
