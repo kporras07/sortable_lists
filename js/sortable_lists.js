@@ -4,6 +4,8 @@
  */
 
 (function () {
+  'use strict';
+
   Drupal.behaviors.sortableLists = {
     attach: function (context, settings) {
       jQuery('.sortable-lists-elements', context).once('sortable-lists', function() {
