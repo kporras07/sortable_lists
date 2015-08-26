@@ -23,12 +23,15 @@
         jQuery('.sortable-lists-elements .select-block ul', context).sortable({
           connectWith: '.sortable-lists-elements .select-block ul',
           placeholder: 'item-placeholder',
-          stop: function(changes) {
-            var items = getItems('.sortable-lists-elements .select-block');
-            jQuery('#sortable-lists-value').val(items);
-            return changes;
-          },
+          stop: updateValue,
         });
+
+        updateValue();
+
+        function updateValue() {
+          var items = getItems('.sortable-lists-elements .select-block');
+          jQuery('#sortable-lists-value').val(items);
+        }
 
         function getId(text) {
           var id = '';
