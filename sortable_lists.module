@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Main file for sortable_lists module
+ * Main file for sortable_lists module.
  */
 
 /**
@@ -43,12 +43,14 @@ function sortable_lists_process($element, $form_state) {
       else {
         $default_value[$element['#type']][$key] = array();
       }
-      $column_count ++;
+      $column_count++;
     }
   }
 
   if (isset($element['#id']) && isset($element['#type'])) {
-    $settings = array('id' => $element['#id'] . '-' . str_replace('_', '-', $element['#type']));
+    $settings = array(
+      'id' => $element['#id'] . '-' . str_replace('_', '-', $element['#type']),
+    );
     foreach ($default_value as $key => $value) {
       $settings['values'][$key] = $value;
     }
@@ -116,7 +118,7 @@ function sortable_lists_process($element, $form_state) {
         '#prefix' => '<div class="sortable-lists-list sortable-lists-list-' . $key . '">',
         '#suffix' => '</div>',
       );
-      $weight ++;
+      $weight++;
     }
   }
 
@@ -124,7 +126,6 @@ function sortable_lists_process($element, $form_state) {
     '#type' => 'hidden',
     '#attributes' => array('id' => 'sortable-lists-value'),
   );
-
 
   $element['#value'] = array_keys($options);
 
@@ -163,10 +164,10 @@ function sortable_lists_element_validate($element, &$form_state) {
   if (sortable_lists_validate_selected_elements($elements, $element)) {
     $values = &$form_state['values'];
     $column_index = 0;
-    foreach($element['#columns'] as $column_value => $column_name) {
+    foreach ($element['#columns'] as $column_value => $column_name) {
 
       $values[$element['#name']][$element['#type']][$column_value] = drupal_map_assoc($elements[$column_index]);
-      $column_index ++;
+      $column_index++;
     }
   }
 }
