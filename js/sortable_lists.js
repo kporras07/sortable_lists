@@ -10,12 +10,15 @@
     attach: function (context, settings) {
       jQuery('.sortable-lists-elements', context).once('sortable-lists', function () {
 
-        jQuery('.sortable-lists-elements select', context).selectWidget();
-
-        jQuery('.sortable-lists-elements li', context).each(function () {
-          var text = jQuery(this).text();
-          var id = getId(text);
-          jQuery(this).attr('id', id);
+        var selectElements = '';
+        jQuery('.sortable-lists-elements select', context).each(function() {
+          var list = jQuery('<ul></ul>');
+          jQuery(this).find('option').each(function() {
+            jQuery(list).append('<li id="' + jQuery(this).val() + '">' + jQuery(this).text() + '</li>');
+          });
+          var div = jQuery('<div class="select-block"></div>').append(list);
+          jQuery(this).before(div);
+          jQuery(this).hide();
         });
 
         jQuery('.sortable-lists-elements .select-block', context).css('display', 'block');
@@ -27,21 +30,9 @@
         });
 
         updateValue();
-
         function updateValue() {
           var items = getItems('.sortable-lists-elements .select-block');
           jQuery('#sortable-lists-value').val(items);
-        }
-
-        function getId(text) {
-          var id = '';
-          jQuery('.sortable-lists-elements select option', context).each(function () {
-            if (jQuery(this).text() === text) {
-              id = jQuery(this).val();
-              return;
-            }
-          });
-          return id;
         }
 
         function getItems(container) {
