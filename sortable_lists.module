@@ -79,13 +79,13 @@ function sortable_lists_process($element, $form_state) {
     '#tree' => TRUE,
     '#attached' => array(
       'library' => array(
-        0 => array('system', 'jquery'),
-        1 => array('system', 'ui'),
-        2 => array('system', 'ui.widget'),
-        3 => array('system', 'ui.sortable'),
+        array('system', 'jquery'),
+        array('system', 'ui'),
+        array('system', 'ui.widget'),
+        array('system', 'ui.sortable'),
       ),
       'js' => array(
-        0 => array(
+        array(
           'data' => array('sortableLists' => $settings),
           'type' => 'setting',
         ),
