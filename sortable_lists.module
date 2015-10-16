@@ -99,7 +99,6 @@ function sortable_lists_process($element, $form_state) {
           'type' => 'file',
         ),
       ),
-
     ),
     '#attributes' => array(
       'class' => array('sortable-lists-elements'),
