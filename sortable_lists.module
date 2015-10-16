@@ -75,8 +75,7 @@ function sortable_lists_process($element, $form_state) {
 
   $element['sortable_lists'] = array(
     '#type' => 'fieldset',
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#collapsible' => FALSE,
     '#tree' => TRUE,
     '#attached' => array(
       'library' => array(
