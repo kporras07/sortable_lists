@@ -26,9 +26,6 @@ INSTALLATION
  * Install as you would normally install a contributed drupal module. See:
    https://drupal.org/documentation/install/modules-themes/modules-7
    for further information.
- * Install jquery-drop-down-widget
-   (https://github.com/karo73/jquery-drop-down-widget)
-   in sites/all/libraries.
 
 
 USAGE
