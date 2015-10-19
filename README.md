@@ -35,7 +35,8 @@ For using this module; you need to add an element to your form an use
 '#type' => 'sortable_lists'; then in #options you provide the options
 as you'll normally do for select/radios/checkboxes and in #columns you should
 provide a key => value array with column keys and names.
-If you want to provide a #default_value index; this should have a detailed structure.
+If you want to provide a #default_value index;
+this should have a detailed structure.
 
 For more information on this; please take a look at example module
 included (sortable_lists_example)

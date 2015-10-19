@@ -10,10 +10,9 @@
     attach: function (context, settings) {
       jQuery('.sortable-lists-elements', context).once('sortable-lists', function () {
 
-        var selectElements = '';
-        jQuery('.sortable-lists-elements select', context).each(function() {
+        jQuery('.sortable-lists-elements select', context).each(function () {
           var list = jQuery('<ul></ul>');
-          jQuery(this).find('option').each(function() {
+          jQuery(this).find('option').each(function () {
             jQuery(list).append('<li id="' + jQuery(this).val() + '">' + jQuery(this).text() + '</li>');
           });
           var div = jQuery('<div class="select-block"></div>').append(list);

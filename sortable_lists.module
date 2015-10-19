@@ -57,8 +57,6 @@ function sortable_lists_process($element, $form_state) {
     }
   }
 
-  $select_widget_path = '';
-
   if (isset($element['#id']) && isset($element['#type'])) {
     $settings = array(
       'id' => $element['#id'] . '-' . str_replace('_', '-', $element['#type']),
